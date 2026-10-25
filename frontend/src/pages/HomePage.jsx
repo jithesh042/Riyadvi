@@ -319,10 +319,6 @@ const CardReveal = ({ children, delay = 0, className = "" }) => {
   );
 };
 
-// ==========================================
-// MAIN APP COMPONENT & PAGES
-// ==========================================
-
 export default function App() {
   const [activePage, setActivePage] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

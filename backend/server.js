@@ -9,9 +9,25 @@ import Contact from './models/Contact.js';
 
 dotenv.config();
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://riyadvi-frontend.onrender.com",
+];
 const PORT = process.env.PORT || 5000;
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
-app.use(express.json({ limit: '1mb' }));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+app.use(express.json({ limit: '1000mb' }));
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', service: 'riyadvi-api' }));
 
