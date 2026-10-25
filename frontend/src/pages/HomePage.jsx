@@ -410,7 +410,7 @@ export default function App() {
           <button onClick={() => navigateTo('home')} className="flex items-center gap-3 group text-left">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-600 p-[1px] shadow-lg shadow-amber-500/10 group-hover:shadow-amber-500/30 transition-all">
               <div className="w-full h-full bg-[#0b0c10] rounded-[11px] flex items-center justify-center">
-                 <img src="../iyadvisoftwaretechnologies.jfif" className='w-full rounded-[11px] flex items-center justify-center' />
+                 <img src="./iyadvisoftwaretechnologies.jfif" className='w-full rounded-[11px] flex items-center justify-center' />
               </div>
             </div>
             <div>
@@ -546,7 +546,7 @@ export default function App() {
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-600 p-[1px]">
                   <div className="w-full h-full bg-[#0b0c10] rounded-[7px] flex items-center justify-center">
-                    <img src="../iyadvisoftwaretechnologies.jfif" className='w-full rounded-[7px] flex items-center justify-center' />
+                    <img src="./iyadvisoftwaretechnologies.jfif" className='w-full rounded-[7px] flex items-center justify-center' />
                   </div>
                 </div>
                 <span className="text-lg font-bold text-white tracking-wider">
