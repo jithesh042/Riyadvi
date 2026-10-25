@@ -213,7 +213,7 @@ const WebGLHeroCanvas = ({ scrollY }) => {
         if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) return;
         ctx.fillStyle = p.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.scale * 2.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, Math.max(0, p.scale * 2.5), 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -329,15 +329,17 @@ export default function App() {
   const [healthReports, setHealthReports] = useState([]);
   const [jobApps, setJobApps] = useState([]);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+ const API_URL = (
+  import.meta.env.VITE_API_URL || 'http://localhost:5000'
+).trim().replace(/\/+$/, '').replace(/\/api$/, '');
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const [leadRes, reportRes, jobsRes] = await Promise.all([
-          fetch(`${API_URL}/leads`),
-          fetch(`${API_URL}/health-reports`),
-          fetch(`${API_URL}/job-applications`),
+          fetch(`${API_URL}/api/leads`),
+          fetch(`${API_URL}/api/health-reports`),
+          fetch(`${API_URL}/api/job-applications`),
         ]);
         if (!leadRes.ok || !reportRes.ok || !jobsRes.ok) throw new Error('Unable to load application data');
         const [leadData, reportData, jobsData] = await Promise.all([
@@ -354,7 +356,7 @@ export default function App() {
   }, []);
 
   const saveLead = async (lead) => {
-    const response = await fetch(`${API_URL}/leads`, {
+    const response = await fetch(`${API_URL}/api/leads`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lead),
     });
     if (!response.ok) throw new Error('Could not save lead');
@@ -363,7 +365,7 @@ export default function App() {
   };
 
   const saveHealthReport = async (report) => {
-    const response = await fetch(`${API_URL}/health-reports`, {
+    const response = await fetch(`${API_URL}/api/health-reports`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(report),
     });
     if (!response.ok) throw new Error('Could not save health report');
@@ -372,7 +374,7 @@ export default function App() {
   };
 
   const saveJobApplication = async (application) => {
-    const response = await fetch(`${API_URL}/job-applications`, {
+    const response = await fetch(`${API_URL}/api/job-applications`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(application),
     });
     if (!response.ok) throw new Error('Could not save job application');
