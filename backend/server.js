@@ -28,7 +28,6 @@ app.use(
   })
 );
 app.use(express.json({ limit: '1000mb' }));
-
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', service: 'riyadvi-api' }));
 
 app.get('/api/leads', async (_req, res, next) => {
